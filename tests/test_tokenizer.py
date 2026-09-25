@@ -30,7 +30,7 @@ def test_not_invertible():
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
 
     # TODO: find an example
-    s = "Hello World!!"
+    s = "Hello      World!!"
     encoded = tokenizer.encode(s, add_special_tokens=False)
     print(f"tokenizer encode {encoded}")
     print(f"tokenizer decode {tokenizer.decode(encoded)}")
