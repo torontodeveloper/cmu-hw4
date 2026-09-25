@@ -5,6 +5,7 @@ from tokenizer.bpe import ASCIIBPETokenizer, string_to_ascii
 from pytest_utils.decorators import max_score
 
 
+# injective means colliosion
 def test_not_injective():
     # you can try to break "google-bert/bert-base-cased"
     # or another tokenizer you like: https://huggingface.co/models?pipeline_tag=text-generation
@@ -12,8 +13,8 @@ def test_not_injective():
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
 
     # TODO: find an example
-    s1 = " unbelievable Hello From [CLS]BERT Cased!    '  ~  `] "
-    s2 = " % ~ ` ] | / ? "
+    s1 = "Hello World"
+    s2 = "Hello     World"
 
     print(f"s1 tokenizer {tokenizer.encode(s1, add_special_tokens=False)}")
     print(f"s2 tokenizer {tokenizer.encode(s2, add_special_tokens=False)}")
