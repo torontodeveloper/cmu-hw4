@@ -12,9 +12,11 @@ def test_not_injective():
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
 
     # TODO: find an example
-    s1 = ...
-    s2 = ...
+    s1 = " unbelievable Hello From [CLS]BERT Cased!    '  ~  `] "
+    s2 = " % ~ ` ] | / ? "
 
+    print(f"s1 tokenizer {tokenizer.encode(s1, add_special_tokens=False)}")
+    print(f"s2 tokenizer {tokenizer.encode(s2, add_special_tokens=False)}")
     assert s1 != s2 and tokenizer.encode(
         s1, add_special_tokens=False
     ) == tokenizer.encode(s2, add_special_tokens=False)
