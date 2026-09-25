@@ -45,8 +45,8 @@ def test_not_preserving_concat():
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
 
     # TODO: find an example
-    a = "Hello"
-    b = "  world!!"
+    a = "Un"
+    b = "believable"
     print(f"Encoder of {a} is {tokenizer.encode(a, add_special_tokens=False)}")
     print(f"Encoder of {b} is {tokenizer.encode(b, add_special_tokens=False)}")
     print(f"Encoder: {tokenizer.encode(a + b, add_special_tokens=False)}")
