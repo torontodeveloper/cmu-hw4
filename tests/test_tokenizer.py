@@ -45,8 +45,8 @@ def test_not_preserving_concat():
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
 
     # TODO: find an example
-    a = ...
-    b = ...
+    a = "Hello   World   "
+    b = "   I love    reading   books"
     assert tokenizer.encode(a + b, add_special_tokens=False) != tokenizer.encode(
         a, add_special_tokens=False
     ) + tokenizer.encode(b, add_special_tokens=False)
