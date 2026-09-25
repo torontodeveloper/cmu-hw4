@@ -31,7 +31,7 @@ def test_not_invertible():
 
     # TODO: find an example
     s = "Hello World!!"
-    encoded = tokenizer.encode(s,add_special_tokens=False))
+    encoded = tokenizer.encode(s, add_special_tokens=False)
     print(f"tokenizer encode {encoded}")
     print(f"tokenizer decode {tokenizer.decode(encoded)}")
     s_recovered = tokenizer.decode(tokenizer.encode(s, add_special_tokens=False))
