@@ -5,7 +5,7 @@ pytest
 omegaconf
 tiktoken
 tqdm
-datasets
+datasets==2.21.0
 wandb
 transformers
 rich
