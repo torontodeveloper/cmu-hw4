@@ -97,9 +97,41 @@ class ASCIIBPETokenizer:
         Returns:
             list[int]: New list of token ids, after one merge step
         """
-
+        new_token_list = []
         # TODO: Implement this function
-        return ...
+        bigram_counter = compute_bigram_statistics(token_ids)
+        most_common_token_pair = bigram_counter.most_common()
+        result = []
+        index = 0
+        new_token_id = len(self.vocab)
+        if len(most_common_token_pair) < 1:
+            return token_ids
+        winner = 0
+        pair = most_common_token_pair[0][0]
+        top_count = most_common_token_pair[0][1]
+        winner = most_common_token_pair[0][0]
+        for candidate_pair, count in most_common_token_pair[1:]:
+            if count < top_count:
+                break
+            if candidate_pair < winner:
+                winner = candidate_pair
+        if len(most_common_token_pair) == 1:
+            pair = most_common_token_pair[0][0]
+        # # This is Tie
+        while index < len(token_ids):
+            if (index != len(token_ids) - 1) and (
+                token_ids[index],
+                token_ids[index + 1],
+            ) == winner:
+                result.append(new_token_id)
+                index += 1
+            else:
+                result.append(token_ids[index])
+            index += 1
+
+        self.vocab.append(self.vocab[winner[0]] + self.vocab[winner[1]])
+        self.merge_rules[winner] = new_token_id
+        return result
 
     def encode(self, text: str) -> list[int]:
         """Convert text to tokens.
@@ -113,8 +145,10 @@ class ASCIIBPETokenizer:
 
         assert all(ord(c) < 128 for c in text), "input text is not ASCII"
 
-        # TODO: Implement this function
-        token_ids = ...
+        ascii_list = string_to_ascii(text)
+        token_ids = ascii_list
+        for bigram, bigram_id in self.merge_rules.items():
+            token_ids = replace_bigram(token_ids, bigram, bigram_id)
         return token_ids
 
     def decode(self, token_ids: list[int]) -> str:
@@ -126,9 +160,8 @@ class ASCIIBPETokenizer:
         Returns:
             str: An ASCII string.
         """
-
-        # TODO: Implement this function
-        return ...
+        text_string_list = [self.vocab[token_id] for token_id in token_ids]
+        return "".join(text_string_list)
 
     @classmethod
     def from_config(cls, config_file: str):
