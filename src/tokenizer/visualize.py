@@ -12,5 +12,8 @@ def visualize_bytes(b: bytes):
 
 
 english_tokenizer = UnicodeBPETokenizer.from_config("data/english-tokenizer.json")
+result = []
 for b in english_tokenizer.vocab[256:]:
     print(f"bytes: {b} <-> token: <{visualize_bytes(b)}>")
+    result.append(len({visualize_bytes(b)}))
+print(f"Max is {max(result)}")
